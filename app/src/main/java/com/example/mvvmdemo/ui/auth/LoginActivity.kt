@@ -3,6 +3,8 @@ package com.example.mvvmdemo.ui.auth
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.mvvmdemo.R
 import com.example.mvvmdemo.d
@@ -26,8 +28,11 @@ class LoginActivity : AppCompatActivity(), AuthListener {
 
     }
 
-    override fun onSuccess() {
-        this.toast("Success")
+    override fun onSuccess(data:LiveData<String>) {
+        //this.toast("Success")
+        data.observe(this, Observer {
+            this.toast("Success")
+        })
 
     }
 
