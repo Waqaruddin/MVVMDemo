@@ -26,6 +26,15 @@ interface MyApi {
 //        @Body user:User
 //    ): Call<ResponseBody>
 
+    @FormUrlEncoded
+    @POST("auth/register")
+    fun register(
+        @Field("name") name:String,
+        @Field("email") email:String,
+        @Field("password") password:String,
+        @Field("type") type:String
+    ):Call<ResponseBody>
+
 
     companion object {
         operator fun invoke():MyApi{

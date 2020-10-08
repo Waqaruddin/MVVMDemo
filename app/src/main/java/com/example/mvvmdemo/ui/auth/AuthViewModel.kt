@@ -8,10 +8,12 @@ class AuthViewModel:ViewModel(){
 
     var email:String? = null
     var password:String? = null
+    var name:String? = null
+    var type:String? = null
 
     var authListener:AuthListener? = null
 
-    fun onLoginButtonClick(view: View){
+    fun onLoginButtonClick(view:View){
 
         if(email.isNullOrEmpty() || password.isNullOrEmpty()){
             authListener?.failure("failure")
@@ -21,5 +23,10 @@ class AuthViewModel:ViewModel(){
         //success
         val loginResponse = UserRepository().login(email!!, password!!)
         authListener?.onSuccess(loginResponse)
+    }
+
+    fun onRegisterButtonClick(view:View){
+        val registerResponse = UserRepository().register(email!!, password!!, name!!,type!!)
+        authListener?.onSuccess(registerResponse)
     }
 }

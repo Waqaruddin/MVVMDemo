@@ -20,6 +20,7 @@ class UserRepository {
                     response: Response<ResponseBody>
                 ) {
                     if (response.isSuccessful) {
+
                         loginResponse.value = "Login Success"
 
                     }
@@ -31,5 +32,26 @@ class UserRepository {
 
             })
         return loginResponse
+    }
+    fun register(email:String, password:String, name:String, type:String):LiveData<String>{
+
+        val registerResponse = MutableLiveData<String>()
+        MyApi().register(name , email , password , type)
+            .enqueue(object:Callback<ResponseBody>{
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    if(response.isSuccessful){
+                        registerResponse.value = "Registered Successfully"
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    registerResponse.value = t.message
+                }
+
+            })
+        return registerResponse
     }
 }

@@ -1,45 +1,58 @@
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.mvvmdemo.ui.auth.AuthViewModel" />
+    </data>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:layout_gravity="center"
-        android:textSize="32dp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Name"
-        android:id="@+id/edit_text_name"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Mobile"
-        android:id="@+id/edit_text_mobile"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:id="@+id/edit_text_email"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:id="@+id/edit_text_password"/>
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:layout_gravity="center"
+            android:textSize="32dp"/>
 
-    <Button
-        android:id="@+id/button_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register"/>
+        <EditText
+            android:text="@={viewModel.type}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="landlord or tenant"
+            android:id="@+id/edit_text_type"/>
 
-</LinearLayout>
+        <EditText
+            android:text="@={viewModel.name}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:id="@+id/edit_text_name"/>
+
+        <EditText
+            android:text="@={viewModel.email}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:id="@+id/edit_text_email"/>
+
+        <EditText
+            android:text="@={viewModel.password}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:id="@+id/edit_text_password"/>
+
+        <Button
+            android:onClick="@{viewModel::onRegisterButtonClick}"
+            android:id="@+id/button_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register"/>
+
+    </LinearLayout>
+</layout>
