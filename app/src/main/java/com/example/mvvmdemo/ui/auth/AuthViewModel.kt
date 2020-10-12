@@ -28,5 +28,6 @@ class AuthViewModel:ViewModel(){
     fun onRegisterButtonClick(view:View){
         val registerResponse = UserRepository().register(email!!, password!!, name!!,type!!)
         authListener?.onSuccess(registerResponse)
+        authListener?.failure("Failure")
     }
 }

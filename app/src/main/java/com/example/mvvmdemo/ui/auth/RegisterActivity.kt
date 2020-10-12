@@ -14,7 +14,7 @@ import com.example.mvvmdemo.toast
 class RegisterActivity : AppCompatActivity(), AuthListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+       // setContentView(R.layout.activity_register)
 
         val binding:ActivityRegisterBinding = DataBindingUtil.setContentView(this, R.layout.activity_register)
         val viewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)

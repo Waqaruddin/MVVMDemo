@@ -1,15 +1,14 @@
 package com.example.mvvmdemo.data.network
 
 import com.example.mvvmdemo.app.Config
+import com.example.mvvmdemo.data.model.ProductResponse
 import com.example.mvvmdemo.data.model.User
+import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface MyApi {
 
@@ -35,12 +34,15 @@ interface MyApi {
         @Field("type") type:String
     ):Call<ResponseBody>
 
+    @GET("products")
+    fun getProducts(): Single<ProductResponse>
+
 
     companion object {
         operator fun invoke():MyApi{
             return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(Config.BASE_URL)
+                .baseUrl("https://grocery-second-app.herokuapp.com/api/")
                 .build()
                 .create(MyApi::class.java)
         }

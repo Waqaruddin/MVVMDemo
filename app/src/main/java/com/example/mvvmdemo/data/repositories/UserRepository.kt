@@ -1,8 +1,13 @@
 package com.example.mvvmdemo.data.repositories
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.mvvmdemo.data.model.ProductResponse
 import com.example.mvvmdemo.data.network.MyApi
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.schedulers.Schedulers
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -53,5 +58,21 @@ class UserRepository {
 
             })
         return registerResponse
+    }
+
+    fun getProducts(){
+        MyApi().getProducts()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(object:DisposableSingleObserver<ProductResponse>(){
+                override fun onSuccess(t: ProductResponse) {
+                    Log.d("abc", t.data[0].productName )
+                }
+
+                override fun onError(e: Throwable) {
+                    Log.d("abc", e.message!!)
+                }
+
+            })
     }
 }
