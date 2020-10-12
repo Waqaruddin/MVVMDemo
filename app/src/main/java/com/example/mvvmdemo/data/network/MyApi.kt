@@ -3,6 +3,7 @@ package com.example.mvvmdemo.data.network
 import com.example.mvvmdemo.app.Config
 import com.example.mvvmdemo.data.model.ProductResponse
 import com.example.mvvmdemo.data.model.User
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.reactivex.Single
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -42,6 +43,7 @@ interface MyApi {
         operator fun invoke():MyApi{
             return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl("https://grocery-second-app.herokuapp.com/api/")
                 .build()
                 .create(MyApi::class.java)

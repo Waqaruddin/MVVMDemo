@@ -8,9 +8,9 @@ class ProductViewModel:ViewModel(){
 
     var productListener:ProductListener? = null
 
-    fun onGetProductClicked(view: View){
-
-        var productResponse = UserRepository().getProducts()
-        productListener?.onSuccess(productResponse)
-    }
+//    fun onGetProductClicked(view: View){
+//
+//        var productResponse = UserRepository().getProducts()
+//        productListener?.onSuccess(productResponse)
+//    }
 }
