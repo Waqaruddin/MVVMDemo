@@ -3,6 +3,7 @@ package com.example.mvvmdemo.data.repositories
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.mvvmdemo.data.model.Product
 import com.example.mvvmdemo.data.model.ProductResponse
 import com.example.mvvmdemo.data.network.MyApi
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -60,13 +61,16 @@ class UserRepository {
         return registerResponse
     }
 
-    fun getProducts(){
+    fun getProducts():LiveData<List<Product>>{
+
+        var productResponse = MutableLiveData<List<Product>>()
         MyApi().getProducts()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(object:DisposableSingleObserver<ProductResponse>(){
                 override fun onSuccess(t: ProductResponse) {
-                    Log.d("abc", t.data[0].productName )
+                    Log.d("abc", t.data[0].productName)
+                    productResponse.value = t.data
                 }
 
                 override fun onError(e: Throwable) {
@@ -74,5 +78,6 @@ class UserRepository {
                 }
 
             })
+        return productResponse
     }
 }

@@ -6,11 +6,13 @@ import com.example.mvvmdemo.data.repositories.UserRepository
 
 class ProductViewModel:ViewModel(){
 
+    var productName:String? = null
+
     var productListener:ProductListener? = null
 
-//    fun onGetProductClicked(view: View){
-//
-//        var productResponse = UserRepository().getProducts()
-//        productListener?.onSuccess(productResponse)
-//    }
+    fun onGetProductClicked(view: View){
+
+        var productResponse = UserRepository().getProducts()
+        productListener?.onSuccess(productResponse)
+    }
 }
